@@ -2,19 +2,36 @@ require "rails_helper"
 
 RSpec.describe "Posts", type: :request do
 
-	describe "GET /post" do
-		before { get "/posts"}
+	describe "GET /posts" do
+		#before { get "/posts"}
 
 		it "should return OK" do
+			get "/posts"
 			payload = JSON.parse(response.body)
 			expect(payload).to be_empty
 			expect(response).to have_http_status(200)
 		end
 
+		describe "Search a post" do
+			let!(:comercial_article) { create(:published_post, title: 'comercial article')}
+			let!(:economics_article) { create(:published_post, title: 'economics article')}
+			let!(:world_news) { create(:published_post, title: 'World news')}
+
+			it "should filter post by title" do
+				get '/posts?search=article'
+				payload = JSON.parse(response.body)
+				expect(payload).to_not be_empty
+				expect(payload.size).to eq(2)
+				# Specific results are present
+				expect(payload.map { |p| p["id"]}.sort ).to eq([comercial_article.id, economics_article.id].sort)
+				expect(response).to have_http_status(200)
+
+			end
+		end
 
 	end
 
-	describe "with data in the DB" do 
+	describe "GET /posts with data in the DB" do 
 		let!(:posts){create_list(:post,10, published: true)}
 
 		it "should return all the published posts" do
@@ -91,10 +108,10 @@ RSpec.describe "Posts", type: :request do
 
 
 
-	describe "PUT /posts{id}" do
+	describe "PUT /posts/{id}" do
 		let!(:article) { create(:post)}
 
-		it "should create a post" do
+		it "should update a post" do
 			req_payload = {
 				post: {
 					title: "titulo",
