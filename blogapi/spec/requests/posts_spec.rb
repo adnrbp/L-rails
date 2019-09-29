@@ -62,6 +62,7 @@ RSpec.describe "Posts", type: :request do
 		end
 	end
 
+	'''
 	describe "POST /posts" do
 		let!(:user) { create(:user)}
 
@@ -149,4 +150,5 @@ RSpec.describe "Posts", type: :request do
 		end
 
 	end
+	'''
 end
