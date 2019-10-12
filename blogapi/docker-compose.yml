@@ -1,0 +1,27 @@
+version: "3"
+
+volumes:
+  local_postgres_data: {}
+
+services:
+  rails:
+    build:
+      context: .
+      dockerfile: ./compose/local/rails/Dockerfile
+    image: blogapi_rails
+    depends_on:
+      - postgres
+    env_file:
+      - ./.envs/.local/.postgres
+    volumes:
+      - .:/app
+    ports:
+      - "8002:8002"
+    command: /start
+
+  postgres:
+    image: postgres
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.envs/.local/.postgres
