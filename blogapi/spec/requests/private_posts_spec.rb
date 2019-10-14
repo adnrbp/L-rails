@@ -50,6 +50,21 @@ RSpec.describe "Posts with authentication", type: :request do
 
 
 			end
+			# context "when requesting user's post" do
+			# 	context "when post is a draft" do
+			# 		before { get "/posts/#{user_post_draft.id}", headers: auth_headers}
+					
+			# 		context "payload" do
+			# 			subject { payload }
+			# 			it { is_expected.to include(:id) }
+			# 		end
+			# 		context "response" do
+			# 			subject { response }
+			# 			it { is_expected.to have_http_status(:ok) }
+			# 		end
+			# 	end
+
+			# end
 		end
 	end
 
