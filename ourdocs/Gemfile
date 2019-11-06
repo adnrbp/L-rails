@@ -24,8 +24,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
-  # debugging
+  # Debugging
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Unit Tests
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :development do
@@ -42,6 +44,13 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  # Factory
+  gem 'factory_bot_rails', '~> 4.0'
+  gem 'faker', '~> 1.9'
+  # Matchers
+  gem 'shoulda-matchers', '~> 3.1'
+  # DB clean
+  gem 'database_cleaner', '~> 1.7'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
