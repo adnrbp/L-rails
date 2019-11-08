@@ -1,3 +1,9 @@
+%h1 Documents
+%p 
+    You have
+    = @docs.count
+    documents in db 
+    
 - @docs.each do |doc|
     %h2= link_to doc.title, doc
     %p= time_ago_in_words(doc.created_at)
